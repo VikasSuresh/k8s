@@ -1,0 +1,85 @@
+Kubernetes
+We will be using kubectl for issuing cmd
+We have to create a deployment config which tells how to create and update instances of your application
+Kubectl uses the Kubernetes API to interact with the cluster
+kubectl get nodes and version
+kubectl create deployment name linktorepo
+kubectl get deployments
+A Pod is a group of one or more containers, with shared storage and network resources...
+and a specification for how to run the containers.
+Every Kubernetes Node runs at least:
+    Kubelet, a process responsible for communication between the Kubernetes Master and the Node; ...
+        it manages the Pods and the containers running on a machine.
+    A container runtime (like Docker) responsible for pulling the container image from a registry,...
+         unpacking the container, and running the application.
+kubectl get - list resources - kubectl get pods
+kubectl describe - show detailed information about a resource - kubectl describe pods
+kubectl logs - print the logs from a container in a pod - kubectl logs $POD_NAME
+kubectl exec - execute a command on a container in a pod - kubectl exec $POD_NAME env
+service is used to expose the node/container etc
+Services match a set of Pods using labels and selectors, a grouping primitive that allows logical ...
+operation on objects in Kubernetes.
+label is like a nickname to the deployment
+kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+kubectl delete service -l run=kubernetes-bootcamp
+Scaling when kubectlg get deployments is used we get some fields:
+    NAME lists the names of the Deployments in the cluster.
+    READY shows the ratio of CURRENT/DESIRED replicas
+    UP-TO-DATE displays the number of replicas that have been updated to achieve the desired state.
+    AVAILABLE displays how many replicas of the application are available to your users.
+    AGE displays the amount of time that the application has been running.
+Here Desired is the no of replicas user defined whike creating a deployment and the current ...
+is the one which is running
+kubectl scale deployments/kubernetes-bootcamp --replicas=4
+for scaling down use kubectl scale and change --replicas=2 eg: kubectl scale deployments/kubernetes-bootcamp --replicas=2
+Upadting:
+    kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+    checking whether it has been updated:
+        kubectl rollout status deployments/kubernetes-bootcamp
+        kubectl rollout undo deployments/kubernetes-bootcamp
+
+
+Kubernetes is used to run multiple containers .. the same can be done using ebs but we wont be having any access..
+over the container which is being created ie if we waant to remove client/server/nginx from ebs in a container we wont...
+be able to do that in ebs 
+Kube consist of a cluster which has a master which gives commands to node... the node is vm/a computer which has a...
+container running.
+Dev - MiniKube
+AWS - EKS
+Google - GKE
+mini kube for local env
+We have to install kubectl to use it we need a vm and then we have to install MiniKube to create a cluster with a single node -> minikube start is used to start ....
+minikube status - info to check whether things are working fine
+kubectl cluster-info - info to check whether things are working fine
+For kube we need the containers to be bulit already, a config file for creating a container and a config file for networking
+Create the config file
+    We use kind: pod /service is in order to create an object for serving different purpose,
+    the apiVersion basically like from in docker which has the predefined objects like pod and service
+    apiVersion: v1 has pod whereas apiVersion: apps/v1 has StatefulSet 
+    We cant deploy a single container directly insided k8s so we have to create a pod to run a container ...
+    thats why its called as a smallest deployable units of computing
+    Services :
+        some of the services types:
+            clusterIp
+            NodePort - Expose a container to outside world used only in dev env
+            ingress
+            loadbalancer
+    the selector and label is used to make sure that the service routes it to that particular pod 
+    if another pod tries to access other pod it can use port to access the pod
+    targetPort is mapped to the pod port
+    and the nodePort is the exposed port(if not specified random port will be generated)
+kubectl apply -f fileName both the pod and service is configured.
+once the above cmd is executed we can view the pods using kubectl get pods
+This node is enclosed in a vm so we have to find the ip of the kube in order to access the pod
+minikube ip to find the ip
+use that ip to access the container running.
+kubectl delete service client-node-port - delete a service
+kubectl delete pod client-pod - delete a pod
+if a docker container is killed, k8's automatically restart the pod.
+When we apply a config file it tells the master to perform operations on nodes.
+To prevent a node from scheduling new pods use: kubectl cordon <node-name>
+To tell is to resume scheduling use: kubectl uncordon <node-name>
+minikube service client-node-port to access the app.
+Two Deployments :
+        Imperative - Step By Step Instruction.
+        Declarative - Make this happen.
