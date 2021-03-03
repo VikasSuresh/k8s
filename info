@@ -83,3 +83,21 @@ minikube service client-node-port to access the app.
 Two Deployments :
         Imperative - Step By Step Instruction.
         Declarative - Make this happen.
+The master update the pod/service using either Imperative or Declarative ..
+In Imperative the user has to mention which pod to be updated.
+Whereas in Declarative the user has to make changes in the config file without changing the name and the kind
+if either of kind or name is changed the master thinks that the pod/service doesnt exist and create a new one.     
+The updates can be checkedd by using  kubectl describe pod POD_NAME
+kubectl delete -f client-pod.yaml to delete the pod/service/deployment created by the config file
+The pods on crashing might be deleted or on updating the pod might change the ip . in either case the k8's master need a mechanism..
+to update the ip of the pod which is deleted-created/updated for that service is used.
+The service uses selector along with label to find out a particular pod is deleted so change the ip of that pod.
+we can update by changing config file.
+when the image is changed we need to make sure that the pod runs the latest version.
+There isnt a proper solution for that yet , Imperative cmd or mentioning the tag in config must be done.
+But using Imperative cmd is more better than mentioning tag option.
+Change the tag version and push it into docker hub.
+then use a Imperative cmd kubectl set image kind_name/name_of_deployment name_of_container=image:tag
+    kubectl set image deployment/client-deployment client=vikassuresh/multi-client:v5
+In order to access the docker server running inside a vm   we can use : $ eval $(minikube docker-env)
+and then docker ps to display all the container (once the terminal is closed we have to use the cmd to get access to the server running in vm)
