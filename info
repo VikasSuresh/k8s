@@ -101,3 +101,11 @@ then use a Imperative cmd kubectl set image kind_name/name_of_deployment name_of
     kubectl set image deployment/client-deployment client=vikassuresh/multi-client:v5
 In order to access the docker server running inside a vm   we can use : $ eval $(minikube docker-env)
 and then docker ps to display all the container (once the terminal is closed we have to use the cmd to get access to the server running in vm)
+
+MultiContainer:
+
+We are gonna create config files for each deployment and for each service for this a total of 11 along with postgress(pvc)...
+should be created
+clusterIp allows containers to access the pods .. whereas the nodePort allows the user to access from outside, in case of clusterIp it isnt possible.
+The user can access via ingress which access the clusterIp.
+kubectl apply -f folderName to run all the config files inside the folder.
