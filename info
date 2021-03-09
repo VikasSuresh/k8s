@@ -109,3 +109,5 @@ should be created
 clusterIp allows containers to access the pods .. whereas the nodePort allows the user to access from outside, in case of clusterIp it isnt possible.
 The user can access via ingress which access the clusterIp.
 kubectl apply -f folderName to run all the config files inside the folder.
+we can either create a single file where u can create the deployments and the service together along with --- to seperate
+or u can provide it in seperate file. the latter gives u more flexiblity to find.
