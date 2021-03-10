@@ -104,10 +104,21 @@ and then docker ps to display all the container (once the terminal is closed we 
 
 MultiContainer:
 
-We are gonna create config files for each deployment and for each service for this a total of 11 along with postgress(pvc)...
+We are gonna create config files for each deployment and for each service for this a total of 11 along with postgress which has pvc (persistent volume claim)...
 should be created
 clusterIp allows containers to access the pods .. whereas the nodePort allows the user to access from outside, in case of clusterIp it isnt possible.
 The user can access via ingress which access the clusterIp.
 kubectl apply -f folderName to run all the config files inside the folder.
 we can either create a single file where u can create the deployments and the service together along with --- to seperate
 or u can provide it in seperate file. the latter gives u more flexiblity to find.
+When using postgres it creates a pod with data when the pod gets destroyed the data inside the old pod wont be carried ovver the new pod ...
+that is created by the kubernetes. For that only pvc is used.
+Increasing the replicas in config files without some configurtions might create problems cause both pod is accessing same pvc and both pod doesnt know other pod exist.
+Volume, persistent Volume and pvc are three different things. Volume in ku8 is not same as in docker.
+Volume - Can survive container restarts but not pod restart.
+Persistent Volume - Can survive pod restart.
+PVC is just a way of letting know that these are the volumes which exist.
+The persistent volume has statucally provisioned volume, if the claim has the volume then its used, if not ...
+then it creates the claim in the persistent volume and its used.
+AccessModes tell us how the nodes interact with the pv.
+And the resources tells us the space allocated.
