@@ -122,3 +122,9 @@ The persistent volume has statucally provisioned volume, if the claim has the vo
 then it creates the claim in the persistent volume and its used.
 AccessModes tell us how the nodes interact with the pv.
 And the resources tells us the space allocated.
+In order to use pvc , in postgres config file we have to mention to use the volume.
+the volumes tells the kube should create a volume of that pvc config.
+the volumeMounts tells the kube that it should use this particular volume.
+kubectl get pv to find all the pv created.
+kubectl get pvc to find all the pvc.
+Add env inside containers in the specific deployment file.
