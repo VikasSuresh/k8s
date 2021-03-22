@@ -125,6 +125,13 @@ And the resources tells us the space allocated.
 In order to use pvc , in postgres config file we have to mention to use the volume.
 the volumes tells the kube should create a volume of that pvc config.
 the volumeMounts tells the kube that it should use this particular volume.
-kubectl get pv to find all the pv created.
+  pv to find all the pv created.
 kubectl get pvc to find all the pvc.
 Add env inside containers in the specific deployment file.
+For creating a secure place to store a value we can use Secret. Like a db pwd.
+kubectl create secret generic pgpwd --from-literal PGPASSWORD=12345asdf to create secret.
+kubectl get secrets to view secret.
+in config file in env the secret is given inside valueFrom with the name being secret name and the key being the key of the value.
+multiple key value pair can be stored inside the same secret.
+Cannot pass integer have to wrap it in quotes(only string is allowed).
+kubectl logs -f postgres-deployment-85677d544-97x76 to fetch the logs
