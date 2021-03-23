@@ -135,3 +135,17 @@ in config file in env the secret is given inside valueFrom with the name being s
 multiple key value pair can be stored inside the same secret.
 Cannot pass integer have to wrap it in quotes(only string is allowed).
 kubectl logs -f postgres-deployment-85677d544-97x76 to fetch the logs
+
+
+loadbalancer and ingress:
+loadbalancer is the legacy way of passing traffic to the service, the disadv is when it has multiple service...
+it exposes multiple ip address
+Ingress is a smart router which sits in front of multiple service and tells what to do.
+if using ingress-nginx check th ingress-nginx and not kubernetes-ingress
+Well be creating an ingress config which creates a ingress controller.
+controller is something which run always to make sure the things in config files comes into reality, in other words..
+the controller routes to corresponding route.
+Important Note : Giving minikube start creates minikube within docker because of this the ingress thing wont work..
+To make it work we have to create minikube with --vm=true command by deleteing the old minkube created with docker.
+minikube delete and run with minikube start --vm=true. and then minikube addons enable ingress
+Create a ingress-service.yaml file with configuration and run it... then we can access tje app via minikube ip.
