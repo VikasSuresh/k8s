@@ -149,3 +149,26 @@ Important Note : Giving minikube start creates minikube within docker because of
 To make it work we have to create minikube with --vm=true command by deleteing the old minkube created with docker.
 minikube delete and run with minikube start --vm=true. and then minikube addons enable ingress
 Create a ingress-service.yaml file with configuration and run it... then we can access tje app via minikube ip.
+
+
+Deployment in google-cloud.
+Create an acc
+Create a new Project.
+Enable a billing account.
+Then In compute KubeEngine -> Enable a Kube Engine.
+Create a cluster.
+Workloads tab shows all the pod/deployments.
+Ingress/Service tab shows services.
+Configuration tab shows secret and env values.
+Application - different plugin running inside cluster.
+storage - pvc/pv
+The process is like this :
+    install google cloud -> config the sdk with out auth info -> login dockercli -> build test version -> run test...
+    -> deploy img -> push to docker -> apply all the config for k8s and imperatively fetch latest img.
+For authenticating we need to create a service-account.json
+For that create a service account-> download it in a json file -> install travis-cli ->
+encrypt and upload the json file into travis-acc -> in travis add code to unencrypt the json file
+and load it into gcloud sdk
+
+Creating a service-acc
+    IAM and Admin -> service account
