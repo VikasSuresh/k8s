@@ -171,4 +171,12 @@ encrypt and upload the json file into travis-acc -> in travis add code to unencr
 and load it into gcloud sdk
 
 Creating a service-acc
-    IAM and Admin -> service account
+    IAM and Admin -> service account -> create a service account -> click the service acc -> keys ...
+    -> keys tab -> add key -> create new -> json
+Have to encrypt the json file and save it in travis for that 
+    docker run -it -v $(pwd):/app ruby sh 
+    then gem install travis inside ruby container.
+    login travis via git username/pass or using token.
+    copy paste the file inside the volumeized folder and then encrypt using:
+        travis encrypt-file service-account.json -r VikasSuresh/k8s --com
+    Make sure the .json file is deleted.
