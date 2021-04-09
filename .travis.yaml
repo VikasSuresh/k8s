@@ -18,11 +18,11 @@ env:
 #   - echo $DOCKER_PWD | docker login -u $DOCKER_ID --password-stdin
 #   - docker build -t react-app -f ./client/Dockerfile.dev ./client
 
-script:
-  - docker run react-app npm run test -- --coverage
+# script:
+#   - docker run react-app npm run test -- --coverage
 
-deploy:
-  provider: script
-  script: bash ./deploy.sh
-  on:
-    branch: master
+# deploy:
+#   provider: script
+#   script: bash ./deploy.sh
+#   on:
+#     branch: master
