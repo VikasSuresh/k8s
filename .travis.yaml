@@ -1,6 +1,15 @@
 services:
   - docker
 
+before_install:
+  - docker build -t react-app -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run react-app npm run test -- --coverage
+
+# services:
+#   - docker
+
 # env:
 #   global:
 #     - SHA=$(git rev-parse HEAD)
