@@ -180,3 +180,12 @@ Have to encrypt the json file and save it in travis for that
     copy paste the file inside the volumeized folder and then encrypt using:
         travis encrypt-file service-account.json -r VikasSuresh/k8s --com
     Make sure the .json file is deleted.
+Once the encrypted file is pushed to travis two encrypted key value pair will be generated inside travis-env variables.
+The docker login cofig is written along with dockerId and docker_pwd added in travis.
+Then the image is containerized and is tested.
+Once its done in docker when using ebs we used provider as ebs, the travis has a set of steps to follow in case of ebs provider...
+whereas in case of k8s its not the case.
+create a deploy script
+we ll be creating two docker build for each api one for latest and another with git shaw tag.
+Added global env variables in travis and the commands are created inside deploy.sh
+
