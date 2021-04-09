@@ -188,4 +188,27 @@ whereas in case of k8s its not the case.
 create a deploy script
 we ll be creating two docker build for each api one for latest and another with git shaw tag.
 Added global env variables in travis and the commands are created inside deploy.sh
+in order to create a secret connect to google cloud console
+run the series of commands(already in travis.yaml) :
+    - gcloud config set project mult-k8s-309807
+    - gcloud config set compute/zone us-central1-c
+    - gcloud container clusters get-credentials multi-cluster
+after setting up the console with the project we can create a secret using the same cmd using kubectl in gcloud.
+once the secret is created we need to setup ingress in order to route.
+we are going to use helm to setup ingress
+it uses helm client and tiller server.
+install helm inside the google cloud by following the steps from their site.
+this tiller server is created as a pod in a node which can create/delete/update a kubernetes cluster/node/pod,
+in order to restrict the access Role based access control(RBAC) is used.
+there are of two types:
+    user acc - identifies a person administering a cluster.
+    service acc - identifies a pod administering a cluster.
+    the above two can be done via:
+        clusterrolebinding - authorize an acc to do set of actions across the entire cluster.
+        rolebinding - authorize an acc to do set of actions in a namespace.
+     kubectl create serviceaccount --namespace kube-system tiller
+     kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+From ingress-nginx server install it via using helm. an ingress-controller will be created in workloads...
+and in service
+
 
