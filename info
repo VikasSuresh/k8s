@@ -102,6 +102,9 @@ then use a Imperative cmd kubectl set image kind_name/name_of_deployment name_of
 In order to access the docker server running inside a vm   we can use : $ eval $(minikube docker-env)
 and then docker ps to display all the container (once the terminal is closed we have to use the cmd to get access to the server running in vm)
 
+Why deployment is used in case of pods are when u create a pod seperately u wont be able to edit any of the of field except image whereas in deployment...
+it can be done such that the name and kind shoudlnt be changed.
+
 MultiContainer:
 
 We are gonna create config files for each deployment and for each service for this a total of 11 along with postgress which has pvc (persistent volume claim)...
