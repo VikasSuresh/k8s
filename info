@@ -220,3 +220,11 @@ From ingress-nginx server install it via using helm. an ingress-controller will 
 and in service
 
 
+We are gonna use letsEncrypt to provide https
+working :  basically kube sent req to lets encrypt , it sends response back saying that it needs to verify and then once its verified....
+it sends a cert for 90 days
+use google domain to purchase domains
+in same click dns on that domain and custom resource records in that -> add the ip with @ and www with cname.
+
+
+
