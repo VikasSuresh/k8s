@@ -225,6 +225,9 @@ working :  basically kube sent req to lets encrypt , it sends response back sayi
 it sends a cert for 90 days
 use google domain to purchase domains
 in same click dns on that domain and custom resource records in that -> add the ip with @ and www with cname.
+have to create two yaml file for creating a certificate and issuing.
+and then push it into the server.
+follow the video for more desc
 
 
 
